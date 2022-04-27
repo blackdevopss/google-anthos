@@ -15,11 +15,11 @@ variable "aks_vnet_name" {
 }
 
 variable "aks_vnet_address_space" {
-  type = string
+  type = list(string)
 }
 
 variable "aks_vnet_dns_servers" {
-  type = string
+  type = list(string)
 }
 
 variable "tags" {
@@ -36,10 +36,6 @@ variable "aks_nodepool_subnet_address_prefixes" {
 
 variable "vnet_service_endpoints" {
   type = list(string)
-}
-
-variable "aks_subnet_route_table_name" {
-  type = string
 }
 
 variable "aks_natgw_public_ip_zone" {
