@@ -6,10 +6,6 @@ variable "azure_region" {
   type = string
 }
 
-variable "aks_subnet_nsg_name" {
-  type = string
-}
-
 variable "aks_vnet_name" {
   type = string
 }

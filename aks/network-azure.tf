@@ -4,7 +4,7 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_network_security_group" "nsg" {
-  name                = var.aks_subnet_nsg_name
+  name                = "nsg-${var.aks_subnet_name}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 }
@@ -52,8 +52,12 @@ resource "azurerm_nat_gateway" "natgw" {
   name                    = var.aks_nat_gateway_name
   location                = azurerm_resource_group.rg.location
   resource_group_name     = azurerm_resource_group.rg.name
-  public_ip_address_ids   = [azurerm_public_ip.natgw.id]
   sku_name                = "Standard"
   idle_timeout_in_minutes = 4
   zones                   = var.aks_natgw_public_ip_zone
+}
+
+resource "azurerm_nat_gateway_public_ip_association" "natgw" {
+  nat_gateway_id       = azurerm_nat_gateway.natgw.id
+  public_ip_address_id = azurerm_public_ip.natgw.id
 }
